@@ -313,7 +313,6 @@ fetch("/api/videos")
   .then(data => {
       const container = document.getElementById("selected");
 
-      // On récupère TOUTES les vidéos de TOUS les sous-dossiers
       const allVideos = [];
       data.forEach(group => {
         group.videos.forEach(v => {
@@ -324,22 +323,23 @@ fetch("/api/videos")
         });
       });
 
-      // Mélange aléatoire (algorithme de Fisher-Yates)
+      // Mélange aléatoire
       for (let i = allVideos.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [allVideos[i], allVideos[j]] = [allVideos[j], allVideos[i]];
       }
 
-      // On prend les 4 premières après mélange
       const randomFour = allVideos.slice(0, 4);
 
-      randomFour.forEach((vid, index) => {
+      randomFour.forEach((vid) => {
           const title = vid.path.split("/").pop().replace(/\..+$/, "");
+          const videoPath = encodeURI(`static/videos/${vid.folder}/${vid.path}`);
+
 
           container.innerHTML += `
             <div class="video-card">
               <video class="video-js" controls preload="auto" width="340" height="190" data-setup="{}">
-                <source src="videos/${vid.path}" type="video/mp4" />
+                <source src="${videoPath}" type="video/mp4" />
               </video>
               <div class="video-title">${title}</div>
               <div class="video-meta">${vid.folder}</div>
@@ -348,11 +348,9 @@ fetch("/api/videos")
       });
   });
 </script>
-
-  <!-- lien vers la page complète -->
-  <a class="see-more" href="realisations.html">
-    Voir toutes les réalisations →
-  </a>
+<a class="see-more" href="realisations">
+  Voir toutes les réalisations →
+</a>
 </section>
 
 
