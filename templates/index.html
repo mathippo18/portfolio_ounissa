@@ -333,7 +333,7 @@ fetch("/api/videos")
 
       randomFour.forEach((vid) => {
           const title = vid.path.split("/").pop().replace(/\..+$/, "");
-          const videoPath = `/video/${encodeURIComponent(vid.folder)}/${encodeURIComponent(vid.path)}`;
+          const videoPath = `https://m-poinsot.com/ounissa/videos/${encodeURIComponent(vid.folder)}/${encodeURIComponent(vid.path)}`;
 
           container.innerHTML += `
             <div class="video-card">
