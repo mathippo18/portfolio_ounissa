@@ -333,8 +333,7 @@ fetch("/api/videos")
 
       randomFour.forEach((vid) => {
           const title = vid.path.split("/").pop().replace(/\..+$/, "");
-          const videoPath = encodeURI(`static/videos/${vid.folder}/${vid.path}`);
-
+          const videoPath = `/video/${encodeURIComponent(vid.folder)}/${encodeURIComponent(vid.path)}`;
 
           container.innerHTML += `
             <div class="video-card">
@@ -346,8 +345,10 @@ fetch("/api/videos")
             </div>
           `;
       });
-  });
+  })
+  .catch(err => console.error("Erreur fetch vidéos :", err));
 </script>
+
 <a class="see-more" href="realisations">
   Voir toutes les réalisations →
 </a>

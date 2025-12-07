@@ -99,7 +99,8 @@
 
               group.videos.forEach(videoFile => {
                   const title = videoFile.replace(/\..+$/, "");
-                  const videoSrc = encodeURI(`static/videos/${folder}/${videoFile}`);
+                  const videoSrc = `/video/${encodeURIComponent(folder)}/${encodeURIComponent(videoFile)}`;
+
 
                   grid.innerHTML += `
                     <div class="video-card">
